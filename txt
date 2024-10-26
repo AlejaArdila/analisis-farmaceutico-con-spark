@@ -1,0 +1,36 @@
+# Análisis Farmacéutico con Spark
+
+Este proyecto emplea **Apache Spark** y **Python** para llevar a cabo un análisis profundo sobre un conjunto de datos de productos farmacéuticos. El objetivo principal es extraer información relevante acerca de la concentración de principios activos, identificar patrones en las formas farmacéuticas y explorar tendencias clave en la industria. Este análisis puede ayudar en la toma de decisiones basada en datos, apuntando a mejorar la efectividad y el desarrollo de productos en el sector farmacéutico.
+
+## Descripción del Problema y Conjunto de Datos
+Este proyecto aborda el desafío de analizar grandes volúmenes de datos farmacéuticos para identificar tendencias y patrones que puedan guiar a los equipos de desarrollo de productos y a los tomadores de decisiones en la industria.
+
+### Conjunto de Datos
+- **Fuente**: https://www.datos.gov.co/Salud-y-Protecci-n-Social/LISTADO-DE-MEDICAMENTOS-EN-VENTA-LIBRE/xzwx-qpja/explore/query/SELECT%20%60principioactivo%60%2C%20%60concentracion%60%2C%20%60formafarmaceutica%60/page/filter
+- **Campos Clave**: Concentración de principios activos, tipo de forma farmacéutica
+
+## Tecnologías Utilizadas
+Este análisis se basa en:
+- **Apache Spark**: Utilizado para procesar y analizar grandes volúmenes de datos de manera eficiente.
+- **Python**: Para la ejecución de scripts y manipulación de datos.
+
+## Explicación del Código
+El proyecto consta de un único script principal, `analisis_farmaceutico.py`, que realiza las siguientes operaciones:
+
+1. **Carga de Datos**: Los datos se cargan en un DataFrame de Spark para permitir un procesamiento rápido y eficiente.
+2. **Limpieza y Preparación**: Se eliminan valores nulos, se estandarizan las unidades de medida, y se transforman las variables categóricas.
+3. **Análisis Exploratorio**: Incluye la visualización de la distribución de principios activos, análisis de la frecuencia de formas farmacéuticas y otras estadísticas descriptivas.
+4. **Análisis de Patrones**: Identificación de las concentraciones más comunes, distribución de tipos de productos, y patrones de fabricación.
+5. **Generación de Resultados**: El código genera gráficos y tablas que resumen las principales tendencias y hallazgos.
+
+### Ejemplo de Código
+```python
+# Cargar datos en un DataFrame de Spark
+from pyspark.sql import SparkSession
+
+spark = SparkSession.builder.appName("Analisis Farmaceutico").getOrCreate()
+data = spark.read.csv("path/to/dataset.csv", header=True, inferSchema=True)
+
+# Transformación de datos
+data_cleaned = data.dropna(how='any') # Elimina filas con valores nulos
+data_cleaned.show(5)
